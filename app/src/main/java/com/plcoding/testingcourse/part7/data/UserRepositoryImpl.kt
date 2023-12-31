@@ -14,7 +14,7 @@ class UserRepositoryImpl(
 
     override suspend fun getProfile(userId: String): Result<Profile> {
         return coroutineScope {
-            val userResult = async {
+            val userResult = async {//async 1
                 try {
                     Result.success(api.getUser(userId))
                 } catch(e: HttpException) {
@@ -23,7 +23,7 @@ class UserRepositoryImpl(
                     Result.failure(e)
                 }
             }
-            val postsResult = async {
+            val postsResult = async {//async 2
                 try {
                     Result.success(api.getPosts(userId))
                 } catch(e: HttpException) {
